@@ -1,0 +1,59 @@
+version: '3.2'
+services:
+  db:
+    container_name: we-database
+    image: mysql:latest
+    ports:
+    - 3306:3306
+    networks:
+      development:
+    volumes:
+    - database:/var/lib/mysql
+    - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: "--init-file /docker-entrypoint-initdb.d/init.sql"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "web_engineering"
+      MYSQL_USER: "dev"
+      MYSQL_PASSWORD: "dev"
+
+  web:
+    container_name: we-server
+    image: web-engineering:2020
+    ports:
+    - 8081:80
+    networks:
+      development:
+    depends_on:
+      - db
+    volumes:
+    - type: bind
+      source: "./src"
+      target: "/var/www/html"
+    - webserver:/data
+
+  adminer:
+    container_name: we-adminer
+    image: adminer:latest
+    ports:
+      - 8082:8080
+    networks:
+      development:
+    depends_on:
+      - db
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: db
+      ADMINER_DEFAULT_DB_NAME: web_engineering
+      ADMINER_DEFAULT_DB_USER: dev
+      ADMINER_DEFAULT_DB_PASSWORD: dev
+      ADMINER_DESIGN: nette
+      ADMINER_PLUGINS: tables-filter tinymce
+
+volumes:
+  database:
+  webserver:
+
+networks:
+  development:
+    driver: bridge
