@@ -3,10 +3,11 @@
 namespace components\database;
 
 use components\core\Utility;
+use components\InternalComponent;
 use PDO;
 use PDOException;
 
-class DatabaseService
+class DatabaseService extends InternalComponent
 {
 
     private static $instance;
@@ -53,8 +54,7 @@ class DatabaseService
             );
         } catch (PDOException $exception) {
             // Connection to the database failed, redirect to error page to not expose stack trace
-            header("Location: /internal-error");
-            return;
+            $this->setError("Connection to the database failed.");
         }
     }
 
