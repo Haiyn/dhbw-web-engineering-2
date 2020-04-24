@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use components\core\Utility;
 use components\validators\ValidatorException;
 use components\validators\UserValidator;
 use models\User;
@@ -43,6 +44,7 @@ class RegisterController extends Controller
     private function sanitizeRegisterData() {
         // Sanitize the data by removing any harmful code and markup
         $user_data = [
+            'user_id' => Utility::generateUUIDv4(),
             'username' => filter_var(htmlspecialchars($_POST['username']), FILTER_SANITIZE_STRING),
             'password' => htmlspecialchars($_POST['password']),
             'email' => filter_var(htmlspecialchars($_POST['email']), FILTER_SANITIZE_EMAIL),

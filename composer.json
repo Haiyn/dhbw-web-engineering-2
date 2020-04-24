@@ -18,6 +18,8 @@
   },
   "scripts": {
     "post-install-cmd": [
+      "rm -rf src/resources/assets",
+      "mkdir src/resources/assets",
       "rm -rf src/resources/assets/bootstrap",
       "cp -R vendor/twbs/bootstrap/dist src/resources/assets/bootstrap",
       "rm -rf src/resources/assets/jquery",
