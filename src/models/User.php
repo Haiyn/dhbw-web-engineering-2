@@ -83,8 +83,7 @@ class User
     public function addUser($user_data)
     {
         return self::$database->execute(
-            "INSERT INTO users VALUES (DEFAULT, :username, :email, :password, :first_name, :last_name, :age, 
-                          :verification_hash, :verified, DEFAULT)",
+            "INSERT INTO users VALUES (:user_id, :username, :email, :password, :first_name, :last_name, :age, DEFAULT)",
             $this->mapRegisterDataToUserTableData($user_data)
         );
     }
@@ -109,6 +108,7 @@ class User
         }
 
         return $data = [
+            ":user_id" => $user_data['user_id'],
             ":username" => $user_data['username'],
             ":email" => $user_data['email'],
             // Hash the password with the salt from config.ini.php
@@ -116,8 +116,6 @@ class User
             ":first_name" => $user_data['first_name'],
             ":last_name" => $user_data['last_name'],
             ":age" => $user_data['age'],
-            ":verification_hash" => bin2hex(openssl_random_pseudo_bytes(16)),
-            ":verified" => "false"
         ];
     }
 }
