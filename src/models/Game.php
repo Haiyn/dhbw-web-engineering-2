@@ -47,14 +47,14 @@ class Game
      */
     public function getGames()
     {
-        $events = self::$database->fetch(
+        $games = self::$database->fetch(
             "SELECT * FROM games",
             []
         );
-        if (empty($events)) {
+        if (empty($games)) {
             return [];
         }
-        return $events;
+        return $games;
     }
 
     /**
