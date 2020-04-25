@@ -36,9 +36,25 @@ class Game
     public function addGame($data)
     {
         return self::$database->execute(
-            "INSERT INTO games VALUES (:game_id, DEFAULT, :title, :description);",
+            "INSERT INTO games VALUES (:game_id, :creator_id, DEFAULT, :title, :description);",
             $this->mapGameDataToGameTableData($data)
         );
+    }
+
+    /**
+     * Get all games
+     * @return array * Array of games
+     */
+    public function getGames()
+    {
+        $events = self::$database->fetch(
+            "SELECT * FROM games",
+            []
+        );
+        if (empty($events)) {
+            return [];
+        }
+        return $events;
     }
 
     /**
@@ -50,6 +66,7 @@ class Game
     {
         return $data = [
             ":game_id" => $data['game_id'],
+            ":creator_id" => $data['creator_id'],
             ":title" => $data['title'],
             ":description" => $data['description']
         ];

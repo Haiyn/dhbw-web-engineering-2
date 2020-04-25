@@ -15,7 +15,7 @@ class Router extends InternalComponent
     private function transformViewNameToControllerName($viewName)
     {
         // If the url has '-' in it, convert it to CamelCase
-        // e.g.: event-overview --> EventOverview
+        // e.g.: game-overview --> GameOverview
         $parts = explode("-", $viewName);
         foreach ($parts as &$part) {
             $part = ucfirst(strtolower($part));
@@ -31,7 +31,7 @@ class Router extends InternalComponent
     private function transformPathToViewName($path)
     {
         // Cut the argument after the host to size
-        // e.g. localhost:8080/event-overview?someparam --> event-overview
+        // e.g. localhost:8080/game-overview?someparam --> game-overview
         $path = ltrim($path, "/");
         $path = trim($path);
         $path = explode("?", $path)[0];
