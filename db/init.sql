@@ -10,9 +10,21 @@ CREATE TABLE IF NOT EXISTS users (
     age SMALLINT,
     registration_date TIMESTAMP DEFAULT NOW()
 );
+CREATE TABLE IF NOT EXISTS games (
+    game_id VARCHAR(36) PRIMARY KEY,
+    creation_date TIMESTAMP DEFAULT NOW(),
+    title VARCHAR(32) NOT NULL,
+    description VARCHAR(256) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS players (
+    player_id VARCHAR(36) PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
+    game_id VARCHAR(36) NOT NULL REFERENCES games (game_id),
+    estimated_value INTEGER NOT NULL DEFAULT 0
+);
 CREATE TABLE IF NOT EXISTS sessions (
     session_id VARCHAR(36) PRIMARY KEY,
-    user_id VARCHAR(36)  NOT NULL REFERENCES users (user_id),
+    user_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
     login_time INTEGER  NOT NULL,
     ip_address VARCHAR(16) NOT NULL,
     user_agent TEXT NOT NULL

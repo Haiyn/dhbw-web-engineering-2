@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
+</head>
+<body>
+<?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
+<div class="container min-vh-80">
+    <h1><?php if( isset($pageTitle)) echo($pageTitle)?></h1><br>
+    <p>Please enter following values to create a game.</p>
+
+    <?php if (isset($isError) && $isError): ?>
+        <div class="alert alert-danger" role="alert">
+            <p class="text-danger"><?=$_SESSION["GAME_CREATE_ERROR"]?></p>
+        </div>
+    <?php endif ?>
+
+    <?php if(isset($isSuccess) && $isSuccess): ?>
+        <div class="alert alert-success" role="alert">
+            <p class="text-success"><?=$_SESSION["GAME_CREATE_SUCCESS"]?></p>
+        </div>
+    <?php endif ?>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="game-create-title">Title*</label>
+            <input id="game-create-title" type="text" name="title" maxlength="32" required class="form-control"><br/>
+        </div>
+        <div class="form-group">
+            <label for="game-create-description">Description*</label>
+            <textarea id="game-create-description" name="description" maxlength="256" required class="form-control"></textarea><br/>
+        </div>
+        <p class="text-danger">*These fields are required.</p>
+        <button type="submit" class="btn btn-primary mb-3">Create Game</button>
+    </form>
+</div>
+<?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
+</body>
+</html>
