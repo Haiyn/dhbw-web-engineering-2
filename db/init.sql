@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS games (
     title VARCHAR(32) NOT NULL,
     description VARCHAR(256) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS attendees (
+CREATE TABLE IF NOT EXISTS players (
     attendee_id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
     game_id VARCHAR(36) NOT NULL REFERENCES games (game_id),
