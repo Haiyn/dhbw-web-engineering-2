@@ -37,7 +37,7 @@ class Game
     {
         return self::$database->execute(
             "INSERT INTO games VALUES (:game_id, DEFAULT, :title, :description);",
-            $this->mapGameDataToEventTableData($data)
+            $this->mapGameDataToGameTableData($data)
         );
     }
 
@@ -46,7 +46,7 @@ class Game
      * @param $data * Data of the game
      * @return array * Modified data
      */
-    private function mapGameDataToEventTableData($data)
+    private function mapGameDataToGameTableData($data)
     {
         return $data = [
             ":game_id" => $data['game_id'],

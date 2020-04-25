@@ -9,7 +9,7 @@ use models\Game;
 
 /**
  * Class GameCreateController
- * Manages the creation of new events.
+ * Manages the creation of new games.
  * @package controllers
  */
 class GameCreateController extends Controller
@@ -37,7 +37,7 @@ class GameCreateController extends Controller
 
     /**
      * Create the game after data validation
-     * @param $data * Data of the event
+     * @param $data * Data of the game
      */
     private function createGame($data)
     {
