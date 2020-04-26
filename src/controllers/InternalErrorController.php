@@ -12,4 +12,9 @@ class InternalErrorController extends Controller
         }
         $this->view->pageTitle = "500 Internal Server Error";
     }
+
+    public function httpRequest()
+    {
+        // TODO: Implement httpRequest() method.
+    }
 }

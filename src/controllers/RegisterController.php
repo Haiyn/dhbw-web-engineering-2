@@ -37,6 +37,11 @@ class RegisterController extends Controller
         $this->view->isError = isset($_GET["error"]);
     }
 
+    public function httpRequest()
+    {
+        // TODO: Implement httpRequest() method.
+    }
+
     /**
      * Sanitizes all received POST data from the user to remove malicious code and invalid data
      * @return array * sanitized user data

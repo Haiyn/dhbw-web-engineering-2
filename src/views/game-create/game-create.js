@@ -8,7 +8,22 @@ let count = 1;
 const deleteCell = '<button type="button" title="Delete" onclick="removeUser(this)" class="btn btn-danger">Delete</button>';
 
 function addUser() {
-    // TODO: ajax request
+    $.ajax({
+        url: window.location.origin + "/game-create",
+        data: {action: 'http_request'},
+        dataType: 'JSON',
+        method: 'POST',
+        success: (result) => {
+            result.message;
+            addRow();
+        },
+        error: (result) => {
+            result.message;
+        }
+    });
+}
+
+function addRow() {
     const value = document.getElementById("game-create-modal-user").value;
     const table = document.getElementById("game-create-invite-table").getElementsByTagName("tbody")[0];
     const row = table.insertRow();

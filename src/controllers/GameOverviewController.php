@@ -41,4 +41,9 @@ class GameOverviewController extends Controller
         $this->view->pageTitle = "Game Overview";
         $this->view->games = $filtered_games;
     }
+
+    public function httpRequest()
+    {
+        // TODO: Implement httpRequest() method.
+    }
 }

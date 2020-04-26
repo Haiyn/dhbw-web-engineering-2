@@ -8,4 +8,9 @@ class NotFoundController extends Controller
     {
         $this->view->pageTitle = "404 Not Found";
     }
+
+    public function httpRequest()
+    {
+        // TODO: Implement httpRequest() method.
+    }
 }

@@ -35,6 +35,11 @@ class GameCreateController extends Controller
         $this->view->isError = isset($_GET["error"]);
     }
 
+    public function httpRequest()
+    {
+        $this->setHttpRequestSuccess("this is a http request");
+    }
+
     /**
      * Create the game after data validation
      * @param $data * Data of the game

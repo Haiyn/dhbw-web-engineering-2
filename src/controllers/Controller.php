@@ -20,6 +20,8 @@ abstract class Controller
 
     abstract public function render($params);
 
+    abstract public function httpRequest();
+
     /*
      * Redirects to the given url. Makes use of the router.
      */
@@ -73,5 +75,16 @@ abstract class Controller
             $redirect = $redirect . "&" . $key . (!empty($value) ? "=" . $value : "");
         }
         $this->redirect($redirect);
+    }
+
+    protected function setHttpRequestSuccess($successMessage, $data = []) {
+        header("Content-Type: application/json");
+        echo json_encode(array("message" => $successMessage, "data" => $data));
+    }
+
+    protected function setHttpRequestError($errorMessage, $data = []) {
+        header("HTTP/1.1 Internal Server Error");
+        header("Content-Type: application/json");
+        die(json_encode(array("message" => $errorMessage, "data" => $data)));
     }
 }

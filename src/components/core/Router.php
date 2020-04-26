@@ -70,8 +70,14 @@ class Router extends InternalComponent
         // Set the viewname
         $controller->viewName = $viewName;
 
-        // Invoke the controller view
-        $controller->render($params);
-        $controller->showView();
+        // Check if request is http request
+        if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'http_request') {
+            // Request is http request, call the httpRequest method
+            $controller->httpRequest();
+        } else {
+            // Invoke the controller view
+            $controller->render($params);
+            $controller->showView();
+        }
     }
 }
