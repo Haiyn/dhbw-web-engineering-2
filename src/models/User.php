@@ -88,6 +88,12 @@ class User
         );
     }
 
+    /**
+     * Updates the password of a user
+     * @param $user_id * User ID of the user that needs the password update
+     * @param $password * the new clear text password
+     * @return bool * successful/not successful
+     */
     public function updatePassword($user_id, $password) {
         return self::$database->execute(
             "UPDATE users SET password = :password WHERE user_id = :user_id",
@@ -98,6 +104,12 @@ class User
         );
     }
 
+    /**
+     * Updates a user with new data
+     * @param $old * Old data array
+     * @param $new * New data array
+     * @return bool * successful/not successful
+     */
     public function updatePersonalInformation($old, $new) {
         // Map the data to query format
         $new += ["user_id" => $old['user_id']];

@@ -46,6 +46,10 @@ class ProfileEditController extends Controller
 
     }
 
+    /**
+     * Controls the updating of a users personal information (left form)
+     * @param $currentUser * The user object of the currently editing user
+     */
     private function updatePersonalData($currentUser) {
         // Sanitize and validate the data
         $newUserData = $this->sanitizePersonalData();
@@ -79,6 +83,10 @@ class ProfileEditController extends Controller
         }
     }
 
+    /**
+     * Sanitizes the POST data of the personal data form
+     * @return array * Sanitized data
+     */
     private function sanitizePersonalData() {
         // Sanitize the data by removing any harmful code and markup
         $user_data = [
@@ -97,6 +105,10 @@ class ProfileEditController extends Controller
         return $user_data;
     }
 
+    /**
+     * Sends the information of the currently editing user to the view for displaying
+     * @param $currentUser * The user object of the currently editing user
+     */
     private function initializeViewData($currentUser) {
         // Only send the public information to the view
         $this->view->username = $currentUser->username;

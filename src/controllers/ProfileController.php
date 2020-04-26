@@ -3,7 +3,6 @@
 namespace controllers;
 
 use components\core\Utility;
-use components\database\DatabaseService;
 use models\User;
 
 class ProfileController extends Controller
@@ -20,15 +19,20 @@ class ProfileController extends Controller
 
         // Get the user for the user ID
         $user = User::getInstance();
-        $userInformation = $user->getUserById($userID);
-        if (empty($userInformation)) {
+        $foundUser = $user->getUserById($userID);
+        if (empty($foundUser)) {
             $this->redirect("/not-found");
         }
 
         // Set the data in the view
-        $this->setData($userInformation);
+        $this->initializeViewData($foundUser);
     }
 
+    /**
+     * Gets the user id either from the URL or from the session
+     * @return mixed|string|null * returns user id (string) if a valid UUIDv4 is set in the URL or if no uuid was given
+     * returns null if an invalid user id was given
+     */
     private function getUserID() {
         // If a GET parameter is set, validate it
         if(isset($_GET['user_id'])) {
@@ -45,7 +49,11 @@ class ProfileController extends Controller
         return $_SESSION['USER_ID'];
     }
 
-    private function setData($user) {
+    /**
+     * Sends the user information to the view for displaying
+     * @param $user * user object that contains the information to display
+     */
+    private function initializeViewData($user) {
         // Only send the public information to the view
         $this->view->username = $user->username;
         if($this->view->isLoggedInUser) {
