@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 CREATE TABLE IF NOT EXISTS games (
     game_id VARCHAR(36) PRIMARY KEY,
+    creator_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
     creation_date TIMESTAMP DEFAULT NOW(),
     title VARCHAR(32) NOT NULL,
     description VARCHAR(256) NOT NULL
