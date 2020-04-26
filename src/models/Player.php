@@ -40,4 +40,32 @@ class Player
             [":game_id" => $game_id]
         );
     }
+
+    /**
+     * Adds a new player to the players table
+     * @param $player_data * data needed by database
+     * @return bool * successful/not successful
+     */
+    public function addPlayer($player_data)
+    {
+        return self::$database->execute(
+            "INSERT INTO players VALUES (:player_id, :user_id, :game_id, :estimated_value)",
+            $this->mapPlayerDataToPlayerTableData($player_data)
+        );
+    }
+
+    /**
+     * Maps the data to the database
+     * @param $data * Data of the player
+     * @return array * Modified data
+     */
+    private function mapPlayerDataToPlayerTableData($data)
+    {
+        return $data = [
+            ":player_id" => $data['player_id'],
+            ":user_id" => $data['user_id'],
+            ":game_id" => $data['game_id'],
+            ":estimated_value" => $data['estimated_value']
+        ];
+    }
 }

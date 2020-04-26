@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <script type="text/javascript" src="/resources/assets/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/resources/assets/jqueryui/jquery-ui.js"></script>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
     <script type="text/javascript" src="/views/game-create/game-create.js"></script>
 </head>
@@ -35,6 +34,7 @@
             </div>
             <div class="form-group">
                 <label>Invite Users</label><br/>
+                <input id="game-create-users" name="users" type="hidden"><br/>
                 <button type="button" title="Invite" class="btn btn-primary mb-3" data-toggle="modal"
                         data-target="#game-create-invite-user-modal">Invite</button>
                 <table id="game-create-invite-table" class="table table-striped">

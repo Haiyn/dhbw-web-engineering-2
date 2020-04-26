@@ -7,15 +7,18 @@ let count = 1;
 
 const deleteCell = '<button type="button" title="Delete" onclick="removeUser(this)" class="btn btn-danger">Delete</button>';
 
-function addUser() {
+function addUser()
+{
+    const name = document.getElementById("game-create-modal-user").value;
     $.ajax({
         url: window.location.origin + "/game-create",
-        data: {action: 'http_request'},
-        dataType: 'JSON',
+        accepts: {json: 'application/json'},
+        dataType: 'json',
         method: 'POST',
+        data: {action: 'http_request', user_name: name},
         success: (result) => {
             result.message;
-            addRow();
+            addRow(name);
         },
         error: (result) => {
             result.message;
@@ -23,22 +26,23 @@ function addUser() {
     });
 }
 
-function addRow() {
-    const value = document.getElementById("game-create-modal-user").value;
+function addRow(name)
+{
     const table = document.getElementById("game-create-invite-table").getElementsByTagName("tbody")[0];
     const row = table.insertRow();
     const cell1 = row.insertCell(0);
     const cell2 = row.insertCell(1);
     const cell3 = row.insertCell(2);
     cell1.innerHTML = count.toString();
-    cell2.innerHTML = value;
+    cell2.innerHTML = name;
     cell3.innerHTML = deleteCell;
-    users.push({index: count, name: value});
+    users.push({index: count, name: name});
     count++;
+    document.getElementById("game-create-users").value = JSON.stringify(users);
 }
 
-function removeUser(row) {
-    // TODO: ajax request
+function removeUser(row)
+{
     const rowIndex = row.parentNode.parentNode.rowIndex;
     users.splice(rowIndex - 1, 1);
     users.forEach((user, index) => {
@@ -57,4 +61,5 @@ function removeUser(row) {
     });
     oldTable.parentNode.replaceChild(newTable, oldTable);
     count--;
+    document.getElementById("game-create-users").value = JSON.stringify(users);
 }

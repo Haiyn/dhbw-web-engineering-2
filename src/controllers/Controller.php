@@ -77,13 +77,26 @@ abstract class Controller
         $this->redirect($redirect);
     }
 
-    protected function setHttpRequestSuccess($successMessage, $data = []) {
+    /**
+     * Successfully finish the http request
+     * @param $successMessage * Success message to be given to the response
+     * @param array $data * Additional data
+     */
+    protected function setHttpRequestSuccess($successMessage, $data = [])
+    {
+        http_response_code(200);
         header("Content-Type: application/json");
         echo json_encode(array("message" => $successMessage, "data" => $data));
     }
 
-    protected function setHttpRequestError($errorMessage, $data = []) {
-        header("HTTP/1.1 Internal Server Error");
+    /**
+     * Finish the http request with an error
+     * @param  * Error message to be given to the response
+     * @param array $data * Additional data
+     */
+    protected function setHttpRequestError($errorMessage, $data = [])
+    {
+        http_response_code(500);
         header("Content-Type: application/json");
         die(json_encode(array("message" => $errorMessage, "data" => $data)));
     }
