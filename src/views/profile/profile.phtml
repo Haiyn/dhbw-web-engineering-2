@@ -2,38 +2,38 @@
 <html lang="en">
     <head>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
-        <link href="/views/profile/profile.css" rel="stylesheet">
+        <link href="/views/profile/profile.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
         <div class="container min-vh-80">
-            <h1><?=$isLoggedInUser ? "My Profile" : "Profile of " . $username?></h1><br>
+            <h1><?= isset($isLoggedInUser) && $isLoggedInUser ? "My Profile" : "Profile of " . $username?></h1><br>
             <div class="container user-information">
                 <div class="row">
                     <div class="col-sm"><strong>Username</strong></div>
-                    <div class="col-sm"><?=$username?></div>
+                    <div class="col-sm"><?= isset($username) ? $username : "" ?></div>
                 </div>
                 <?php if(isset($isLoggedInUser) && $isLoggedInUser): ?>
                     <div class="row">
                         <div class="col-sm"><strong>Email</strong></div>
-                        <div class="col-sm"><?=$email?></div>
+                        <div class="col-sm"><?= isset($email) ? $email : "" ?></div>
                     </div>
                 <? endif; ?>
                 <div class="row">
                     <div class="col-sm"><strong>First Name</strong></div>
-                    <div class="col-sm"><?= $firstName == "" ? "Not given" : $firstName?></div>
+                    <div class="col-sm"><?= isset($firstName) && $firstName == "" ? "Not given" : $firstName?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Last Name</strong></div>
-                    <div class="col-sm"><?= $lastName == "" ? "Not given" : $lastName?></div>
+                    <div class="col-sm"><?= isset($lastName) && $lastName == "" ? "Not given" : $lastName?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Age</strong></div>
-                    <div class="col-sm"><?= $age == "" ? "Not given" : $age?></div>
+                    <div class="col-sm"><?= isset($age) && $age == "" ? "Not given" : $age?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Joined on</strong></div>
-                    <div class="col-sm"><?= $registrationDate ?></div>
+                    <div class="col-sm"><?= isset($registrationDate) ? $registrationDate : "" ?></div>
                 </div>
             </div>
             <?php if($isLoggedInUser): ?>

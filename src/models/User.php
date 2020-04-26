@@ -88,6 +88,31 @@ class User
         );
     }
 
+    public function updatePassword($user_id, $password) {
+        return self::$database->execute(
+            "UPDATE users SET password = :password WHERE user_id = :user_id",
+            [
+                ":password" => md5(Utility::getIniFile()['AUTH_SALT'] . $password),
+                ":user_id" => $user_id
+            ]
+        );
+    }
+
+    public function updatePersonalInformation($old, $new) {
+        // Map the data to query format
+        $new += ["user_id" => $old['user_id']];
+        $data = $this->mapRegisterDataToUserTableData($new);
+        unset($data[':password']);
+
+        // Run the update query
+        return self::$database->execute(
+            "UPDATE users 
+            SET username = :username, email = :email, first_name = :first_name, last_name = :last_name, age = :age
+            WHERE user_id = :user_id",
+            $data
+        );
+    }
+
     /**
      * Maps the data from user_data to a users database object
      * user_id and creation_date are generated in database
@@ -96,7 +121,7 @@ class User
      */
     private function mapRegisterDataToUserTableData($user_data)
     {
-        // Check for empty values, postgres must receive null not ""
+        // Check for empty values, mysql must receive null not ""
         if (empty($user_data['first_name'])) {
             $user_data['first_name'] = null;
         }

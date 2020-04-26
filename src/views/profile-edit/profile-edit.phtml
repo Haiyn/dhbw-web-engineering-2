@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
+        <link href="/views/profile-edit/profile-edit.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/views/profile-edit/profile-edit.js"></script>
+    </head>
+    <body>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
+        <div class="container min-vh-80">
+            <?php if(isset($isError) && $isError): ?>
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-danger"><?php echo $_SESSION['PROFILE_EDIT_ERROR']; ?></p>
+                </div>
+            <?php endif ?>
+
+            <?php if(isset($isSuccess) && $isSuccess): ?>
+                <div class="alert alert-success" role="alert">
+                    <p class="text-success"><?php echo $_SESSION["PROFILE_EDIT_SUCCESS"]; ?></p>
+                </div>
+            <?php endif ?>
+            <div class="row">
+                <div class="col-sm">
+                    <h2>Edit my Personal Information</h2><br>
+                    <form id="js-personal-form" method="post">
+                        <div class="form-group">
+                            <label for="js-personal-username">Username</label>
+                            <input disabled required id="js-personal-username" type="text" name="username"  maxlength="32"
+                                   class="form-control" value="<?= isset($username) ? $username : "" ?>"><br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="js-personal-email">E-Mail</label>
+                            <input disabled required id="js-personal-email" type="email" name="email" maxlength="32"
+                                   class="form-control" value="<?= isset($email) ? $email : "" ?>"><br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="js-personal-firstname">First Name</label>
+                            <input disabled id="js-personal-firstname" type="text" name="first_name" maxlength="32"
+                                   class="form-control" value="<?= isset($firstName) ? $firstName : "" ?>"><br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="js-personal-lastname">Last Name</label>
+                            <input disabled id="js-personal-lastname" type="text" name="last_name" maxlength="32"
+                                   class="form-control" value="<?= isset($lastName) ? $lastName : "" ?>"><br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="js-personal-age">Age</label>
+                            <input disabled id="js-personal-age" type="number" name="age" class="form-control"
+                                   value="<?= isset($age) ? $age : "" ?>"><br/>
+                        </div>
+                        <button hidden id="js-personal-submit" type="submit" class="btn btn-primary">Save Information</button>
+                    </form>
+                    <button id="js-personal-enable" class="btn btn-primary">Edit Information</button>
+                </div>
+                <div class="col-sm">
+                    <h2>Change Password</h2><br/>
+                    <form id="js-password-form" method="post">
+                        <div class="form-group">
+                            <label for="js-password-password1">New Password</label>
+                            <input disabled required id="js-password-password1" type="password" name="new_password_1"
+                                   maxlength="32" class="form-control"><br/>
+                        </div>
+                        <div class="form-group">
+                            <label for="js-personal-password2">Repeat New Password</label>
+                            <input disabled required id="js-password-password2" type="password" name="new_password_2"
+                                   maxlength="32" class="form-control"><br/>
+                        </div>
+                        <button hidden id="js-password-submit" type="submit" class="btn btn-primary">Save Password</button>
+                    </form>
+                    <button id="js-password-enable" class="btn btn-primary">Edit Password</button>
+                </div>
+            </div>
+        </div>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
+    </body>
+</html>
