@@ -44,7 +44,7 @@ class Game
     /**
      * Searches the games table for a game with the passed game id
      * @param $game_id * game id to search for
-     * @return array|object * found users
+     * @return array|object * found game
      */
     public function getGameById($game_id)
     {

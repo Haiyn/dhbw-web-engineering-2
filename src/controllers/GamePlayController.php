@@ -18,7 +18,7 @@ class GamePlayController extends Controller
             if (empty($gameById)) {
                 $this->redirect("game-overview");
             }
-            if ($this->checkUserIsInvited($gameById)) {
+            if ($this->checkIfUserHasAccess($gameById)) {
                 // At this point the user is either invited or the creator of the game
             } else {
                 // The user is not invited or the creator of the game, so he gets redirected to game overview page
@@ -37,7 +37,7 @@ class GamePlayController extends Controller
      * @param $game * Game to be checked
      * @return bool * Invited, creator/ not invited, not creator
      */
-    public function checkUserIsInvited($game)
+    public function checkIfUserHasAccess($game)
     {
         $player = Player::getInstance();
         // Check if current user is game creator
