@@ -41,12 +41,17 @@ class GameCreateController extends Controller
      */
     private function createGame($data)
     {
+        if (isset($_SESSION["USER_ID"])) {
+            $data["creator_id"] = $_SESSION["USER_ID"];
+        }
+
         $game_validator = GameValidator::getInstance();
         try {
             $game_validator->validateGameCreateData($data);
         } catch (ValidatorException $exception) {
             $this->setError($exception->getMessage(), $exception->getParams());
         }
+
         $game = Game::getInstance();
         if (!$game->addGame($data)) {
             $this->setError("Game could not be created.");
