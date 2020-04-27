@@ -21,15 +21,15 @@
                 <? endif; ?>
                 <div class="row">
                     <div class="col-sm"><strong>First Name</strong></div>
-                    <div class="col-sm"><?= isset($firstName) && $firstName == "" ? "Not given" : $firstName?></div>
+                    <div class="col-sm"><?= isset($firstName) && !empty($firstName) ? $firstName : "Not given"?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Last Name</strong></div>
-                    <div class="col-sm"><?= isset($lastName) && $lastName == "" ? "Not given" : $lastName?></div>
+                    <div class="col-sm"><?= isset($firstName) && !empty($firstName) ? $firstName : "Not given"?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Age</strong></div>
-                    <div class="col-sm"><?= isset($age) && $age == "" ? "Not given" : $age?></div>
+                    <div class="col-sm"><?= isset($firstName) && !empty($firstName) ? $firstName : "Not given"?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"><strong>Joined on</strong></div>
