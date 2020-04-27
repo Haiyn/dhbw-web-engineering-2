@@ -2,10 +2,28 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link <?= strpos($_SERVER['REQUEST_URI'], "home") ? "active" : "" ?>" href="/home">Home</a>
-                <a class="nav-item nav-link <?= strpos($_SERVER['REQUEST_URI'], "game-overview") ? "active" : "" ?>" href="/game-overview">Games</a>
-                <a class="nav-item nav-link" <?= strpos($_SERVER['REQUEST_URI'], "profile") ? "active" : "" ?> href="#">My Profile</a>
-                <a class="nav-item nav-link" href="/login?logout">Logout</a>
+                <a class="nav-item nav-link
+                   <?= strpos($_SERVER['REQUEST_URI'], "home") ? "active" : "" ?>"
+                   href="/home">Home</a>
+                <? if(isset($_SESSION['USER_ID'])): ?>
+                    <!-- Logged In -->
+                    <a class="nav-item nav-link
+                       <?= strpos($_SERVER['REQUEST_URI'], "game") ? "active" : "" ?>"
+                       href="/game-overview">Games</a>
+                    <a class="nav-item nav-link"
+                        <?= strpos($_SERVER['REQUEST_URI'], "profile") ? "active" : "" ?>
+                       href="/profile?user_id=<?=$_SESSION['USER_ID']?>">My Profile</a>
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
+                <?php else: ?>
+                    <!-- Not logged in -->
+                    <a class="nav-item nav-link"
+                        <?= strpos($_SERVER['REQUEST_URI'], "register") ? "active" : "" ?>
+                       href="/register">Register</a>
+                    <a class="nav-item nav-link"
+                        <?= strpos($_SERVER['REQUEST_URI'], "login") ? "active" : "" ?>
+                       href="/login">Login</a>
+                <?php endif; ?>
+
             </div>
         </div>
     </nav>
