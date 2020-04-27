@@ -10,17 +10,17 @@
                     <a class="nav-item nav-link
                        <?= strpos($_SERVER['REQUEST_URI'], "game") ? "active" : "" ?>"
                        href="/game-overview">Games</a>
-                    <a class="nav-item nav-link"
-                        <?= strpos($_SERVER['REQUEST_URI'], "profile") ? "active" : "" ?>
-                       href="/profile?user_id=<?=$_SESSION['USER_ID']?>">My Profile</a>
+                    <a class="nav-item nav-link
+                        <?= strpos($_SERVER['REQUEST_URI'], "profile") ? "active" : "" ?>"
+                       href="/profile>">My Profile</a>
                     <a class="nav-item nav-link" href="/logout">Logout</a>
                 <?php else: ?>
                     <!-- Not logged in -->
-                    <a class="nav-item nav-link"
-                        <?= strpos($_SERVER['REQUEST_URI'], "register") ? "active" : "" ?>
+                    <a class="nav-item nav-link
+                        <?= strpos($_SERVER['REQUEST_URI'], "register") ? "active" : "" ?>"
                        href="/register">Register</a>
-                    <a class="nav-item nav-link"
-                        <?= strpos($_SERVER['REQUEST_URI'], "login") ? "active" : "" ?>
+                    <a class="nav-item nav-link
+                        <?= strpos($_SERVER['REQUEST_URI'], "login") ? "active" : "" ?>"
                        href="/login">Login</a>
                 <?php endif; ?>
 
