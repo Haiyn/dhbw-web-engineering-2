@@ -1,39 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="/resources/assets/jquery/jquery.min.js"></script>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
+    <script type="text/javascript" src="/views/game-create/game-create.js"></script>
 </head>
 <body>
-<?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
-<div class="container min-vh-80">
-    <h1><?php if( isset($pageTitle)) echo($pageTitle)?></h1><br>
-    <p>Please enter following values to create a game.</p>
+    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
+    <div class="container min-vh-80">
+        <h1><?php if( isset($pageTitle)) echo($pageTitle)?></h1><br>
+        <p>Please enter following values to create a game.</p>
 
-    <?php if (isset($isError) && $isError): ?>
-        <div class="alert alert-danger" role="alert">
-            <p class="text-danger"><?=$_SESSION["GAME_CREATE_ERROR"]?></p>
-        </div>
-    <?php endif ?>
+        <?php if (isset($isError) && $isError): ?>
+            <div class="alert alert-danger" role="alert">
+                <p class="text-danger"><?=$_SESSION["GAME_CREATE_ERROR"]?></p>
+            </div>
+        <?php endif ?>
 
-    <?php if(isset($isSuccess) && $isSuccess): ?>
-        <div class="alert alert-success" role="alert">
-            <p class="text-success"><?=$_SESSION["GAME_CREATE_SUCCESS"]?></p>
-        </div>
-    <?php endif ?>
+        <?php if(isset($isSuccess) && $isSuccess): ?>
+            <div class="alert alert-success" role="alert">
+                <p class="text-success"><?=$_SESSION["GAME_CREATE_SUCCESS"]?></p>
+            </div>
+        <?php endif ?>
 
-    <form method="post">
-        <div class="form-group">
-            <label for="game-create-title">Title*</label>
-            <input id="game-create-title" type="text" name="title" maxlength="32" required class="form-control"><br/>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/alert/alert.html" ?>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="game-create-title">Title*</label>
+                <input id="game-create-title" type="text" name="title" maxlength="32" required class="form-control"><br/>
+            </div>
+            <div class="form-group">
+                <label for="game-create-description">Description*</label>
+                <textarea id="game-create-description" name="description" maxlength="256" required class="form-control"></textarea><br/>
+            </div>
+            <div class="form-group">
+                <label>Invite Users</label><br/>
+                <input id="game-create-users" name="users" type="hidden"><br/>
+                <button type="button" title="Invite" class="btn btn-primary mb-3" data-toggle="modal"
+                        data-target="#game-create-invite-user-modal">Invite</button>
+                <table id="game-create-invite-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-danger">*These fields are required.</p>
+            <button type="submit" class="btn btn-primary mb-3">Create Game</button>
+        </form>
+    </div>
+    <!-- Invite user modal -->
+    <div id="game-create-invite-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invite User</h5><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <label for="game-create-modal-user">Username/E-Mail</label>
+                    <input id="game-create-modal-user" type="text" required class="form-control"><br/>
+                    <p class="text-info">Invited users will see this event on the overview page.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addUser()" data-dismiss="modal">Invite</button>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="game-create-description">Description*</label>
-            <textarea id="game-create-description" name="description" maxlength="256" required class="form-control"></textarea><br/>
-        </div>
-        <p class="text-danger">*These fields are required.</p>
-        <button type="submit" class="btn btn-primary mb-3">Create Game</button>
-    </form>
-</div>
-<?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
+    </div>
+    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
 </body>
 </html>

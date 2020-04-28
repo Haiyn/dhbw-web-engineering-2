@@ -12,8 +12,7 @@ class RegisterController extends Controller
     public function render($parameters)
     {
         // The register button was pressed
-        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']))
-        {
+        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
             // Sanitize the received data
             $sanitized_data = $this->sanitizeRegisterData();
 
@@ -41,7 +40,8 @@ class RegisterController extends Controller
      * Sanitizes all received POST data from the user to remove malicious code and invalid data
      * @return array * sanitized user data
      */
-    private function sanitizeRegisterData() {
+    private function sanitizeRegisterData()
+    {
         // Sanitize the data by removing any harmful code and markup
         $user_data = [
             'user_id' => Utility::generateUUIDv4(),

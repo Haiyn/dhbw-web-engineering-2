@@ -42,6 +42,23 @@ class Game
     }
 
     /**
+     * Searches the games table for a game with the passed game id
+     * @param $game_id * game id to search for
+     * @return array|object * found game
+     */
+    public function getGameById($game_id)
+    {
+        $games = self::$database->fetch(
+            "SELECT * from games WHERE game_id = :game_id",
+            [":game_id" => $game_id]
+        );
+        if (empty($games)) {
+            return [];
+        }
+        return $games[0];
+    }
+
+    /**
      * Get all games
      * @return array * Array of games
      */

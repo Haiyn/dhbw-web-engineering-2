@@ -4,6 +4,7 @@ namespace components\core;
 
 use components\InternalComponent;
 use controllers\NotFoundController;
+use requests\HttpRequestMiddleware;
 
 class Router extends InternalComponent
 {
@@ -41,6 +42,23 @@ class Router extends InternalComponent
     }
 
     /**
+     * Transform the view name and handler to the full handler name
+     * @param $viewName * Name of the view e.g. game-create
+     * @param $handler * Name of the handler e.g. user_access
+     * @return string * Handler name
+     */
+    private function transformHandlerToHandlerName($viewName, $handler)
+    {
+        $viewName = str_replace("-", "_", $viewName);
+        $exploded_handler = explode("_", $handler);
+        $result = "";
+        foreach ($exploded_handler as $h) {
+            $result .= ucfirst($h);
+        }
+        return "\\requests\\{$viewName}\\{$result}HttpRequestHandler";
+    }
+
+    /**
      * Routes from the URL to the correct Controller
      * @param $params * URI parameters
      */
@@ -70,8 +88,24 @@ class Router extends InternalComponent
         // Set the viewname
         $controller->viewName = $viewName;
 
-        // Invoke the controller view
-        $controller->render($params);
-        $controller->showView();
+        // Check if request is http request
+        if (
+            isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'http_request' &&
+            isset($_POST['handler']) && !empty($_POST['handler'])
+        ) {
+            // Request is http request
+            $handlerName = $this->transformHandlerToHandlerName($viewName, $_POST['handler']);
+            $handlerPath = substr(str_replace("\\", "/", "{$handlerName}.php"), 1);
+            // Check if the handler exists
+            if (file_exists($handlerPath)) {
+                // Call the http request
+                $httpRequest = new HttpRequestMiddleware();
+                $httpRequest->handleHttpRequest($handlerName);
+            }
+        } else {
+            // Invoke the controller view
+            $controller->render($params);
+            $controller->showView();
+        }
     }
 }
