@@ -18,7 +18,7 @@ function hideSuccess()
 function showError(message)
 {
     hideSuccess();
-    $('#alert-error-message').show().text(message);
+    $('#alert-error-message').text(message);
     $('#alert-error').show();
 }
 
