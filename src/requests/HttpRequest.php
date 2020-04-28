@@ -3,7 +3,6 @@
 namespace requests;
 
 use components\authorization\AuthorizationService;
-use stdClass;
 
 /**
  * Class HttpRequest
@@ -29,13 +28,14 @@ class HttpRequest
         $this->session->checkSession();
 
         $handler = new $handlerClassName();
-        $result = null;
         try {
             $result = $handler->handle();
         } catch (HttpRequestException $exception) {
             $this->setHttpRequestError($exception->getMessage(), $exception->getData());
         }
-        $this->setHttpRequestSuccess($result['message'], $result['data']);
+        if(!empty($result) {
+            $this->setHttpRequestSuccess($result['message'], $result['data']);
+        }
     }
 
     /**

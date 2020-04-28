@@ -8,8 +8,6 @@ use components\validators\GameValidator;
 use models\Game;
 use models\Player;
 use models\User;
-use requests\game_create\UserAccessHttpRequestHandler;
-use requests\HttpRequestException;
 
 /**
  * Class GameCreateController

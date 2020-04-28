@@ -3,8 +3,6 @@
 namespace controllers;
 
 use components\authorization\AuthorizationService;
-use http\Exception\BadMethodCallException;
-use requests\HttpRequestException;
 use stdClass;
 
 abstract class Controller
