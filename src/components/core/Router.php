@@ -42,10 +42,10 @@ class Router extends InternalComponent
     }
 
     /**
-     * Transform
-     * @param $viewName
-     * @param $handler
-     * @return string
+     * Transform the view name and handler to the full handler name
+     * @param $viewName * Name of the view e.g. game-create
+     * @param $handler * Name of the handler e.g. user_access
+     * @return string * Handler name
      */
     private function transformHandlerToHandlerName($viewName, $handler)
     {
