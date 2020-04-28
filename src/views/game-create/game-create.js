@@ -8,6 +8,9 @@ let count = 1;
 
 const deleteCell = '<button type="button" title="Delete" onclick="removeUser(this)" class="btn btn-danger">Delete</button>';
 
+/**
+ * Add a user after checking the name of the user with a http request
+ */
 function addUser()
 {
     const name = document.getElementById("game-create-modal-user").value;
@@ -25,6 +28,10 @@ function addUser()
         });
 }
 
+/**
+ * Add a row with a user name to the table
+ * @param name Name of the user of the row
+ */
 function addRow(name)
 {
     const table = document.getElementById("game-create-invite-table").getElementsByTagName("tbody")[0];
@@ -40,6 +47,10 @@ function addRow(name)
     document.getElementById("game-create-users").value = JSON.stringify(users);
 }
 
+/**
+ * Remove a user at a specific row and update all indices
+ * @param row Row of the user to be removed
+ */
 function removeUser(row)
 {
     const rowIndex = row.parentNode.parentNode.rowIndex;

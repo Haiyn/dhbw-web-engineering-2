@@ -41,7 +41,13 @@ class Router extends InternalComponent
         return $path[0];
     }
 
-    private function transformHandlerToClassName($viewName, $handler)
+    /**
+     * Transform
+     * @param $viewName
+     * @param $handler
+     * @return string
+     */
+    private function transformHandlerToHandlerName($viewName, $handler)
     {
         $viewName = str_replace("-", "_", $viewName);
         $exploded_handler = explode("_", $handler);
@@ -87,12 +93,14 @@ class Router extends InternalComponent
             isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'http_request' &&
             isset($_POST['handler']) && !empty($_POST['handler'])
         ) {
-            // Request is http request, call the httpRequest method
-            $handlerClassName = $this->transformHandlerToClassName($viewName, $_POST['handler']);
-            $handlerPath = substr(str_replace("\\", "/", "{$handlerClassName}.php"), 1);
+            // Request is http request
+            $handlerName = $this->transformHandlerToHandlerName($viewName, $_POST['handler']);
+            $handlerPath = substr(str_replace("\\", "/", "{$handlerName}.php"), 1);
+            // Check if the handler exists
             if (file_exists($handlerPath)) {
+                // Call the http request
                 $httpRequest = new HttpRequest();
-                $httpRequest->handleHttpRequest($handlerClassName);
+                $httpRequest->handleHttpRequest($handlerName);
             }
         } else {
             // Invoke the controller view

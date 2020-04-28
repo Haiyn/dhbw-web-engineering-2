@@ -1,3 +1,8 @@
+/**
+ * Class HttpRequest
+ * Creates a http request.
+ * @package requests
+ */
 class HttpRequest {
     constructor(url, data)
     {
@@ -5,6 +10,10 @@ class HttpRequest {
         this.data = data;
     }
 
+    /**
+     * Send the http request
+     * @returns {Promise<Array>} Message and data of the result
+     */
     send()
     {
         return new Promise((resolve, reject) => $.ajax({

@@ -5,6 +5,11 @@ namespace requests;
 use components\authorization\AuthorizationService;
 use stdClass;
 
+/**
+ * Class HttpRequest
+ * Handles the http requests
+ * @package requests
+ */
 class HttpRequest
 {
     protected $session;
@@ -16,8 +21,8 @@ class HttpRequest
     }
 
     /**
-     * Handle the htt request, called from the router
-     * @param $handlerClassName
+     * Handle the http request, called from the router
+     * @param $handlerClassName * Name of the handler
      */
     public function handleHttpRequest($handlerClassName)
     {
