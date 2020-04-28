@@ -27,11 +27,6 @@ class GamePlayController extends Controller
         }
     }
 
-    public function httpRequest()
-    {
-        $this->session->checkSession();
-    }
-
     /**
      * Check if the user is either invited or the creator of the game
      * @param $game * Game to be checked

@@ -4,6 +4,7 @@ namespace components\core;
 
 use components\InternalComponent;
 use controllers\NotFoundController;
+use requests\HttpRequest;
 
 class Router extends InternalComponent
 {
@@ -40,6 +41,17 @@ class Router extends InternalComponent
         return $path[0];
     }
 
+    private function transformHandlerToClassName($viewName, $handler)
+    {
+        $viewName = str_replace("-", "_", $viewName);
+        $exploded_handler = explode("_", $handler);
+        $result = "";
+        foreach ($exploded_handler as $h) {
+            $result .= ucfirst($h);
+        }
+        return "\\requests\\{$viewName}\\{$result}HttpRequestHandler";
+    }
+
     /**
      * Routes from the URL to the correct Controller
      * @param $params * URI parameters
@@ -71,9 +83,17 @@ class Router extends InternalComponent
         $controller->viewName = $viewName;
 
         // Check if request is http request
-        if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'http_request') {
+        if (
+            isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'http_request' &&
+            isset($_POST['handler']) && !empty($_POST['handler'])
+        ) {
             // Request is http request, call the httpRequest method
-            $controller->httpRequest();
+            $handlerClassName = $this->transformHandlerToClassName($viewName, $_POST['handler']);
+            $handlerPath = substr(str_replace("\\", "/", "{$handlerClassName}.php"), 1);
+            if (file_exists($handlerPath)) {
+                $httpRequest = new HttpRequest();
+                $httpRequest->handleHttpRequest($handlerClassName);
+            }
         } else {
             // Invoke the controller view
             $controller->render($params);

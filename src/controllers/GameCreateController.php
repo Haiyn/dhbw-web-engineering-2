@@ -8,7 +8,7 @@ use components\validators\GameValidator;
 use models\Game;
 use models\Player;
 use models\User;
-use requests\GameCreateHttpRequest;
+use requests\game_create\UserAccessHttpRequestHandler;
 use requests\HttpRequestException;
 
 /**
@@ -38,22 +38,6 @@ class GameCreateController extends Controller
         $this->view->pageTitle = "Create Game";
         $this->view->isSuccess = isset($_GET["success"]);
         $this->view->isError = isset($_GET["error"]);
-    }
-
-    public function httpRequest()
-    {
-        $this->session->checkSession();
-
-        if (isset($_POST['user_name'])) {
-            $user_name = $_POST['user_name'];
-            $http_request = GameCreateHttpRequest::getInstance();
-            try {
-                $http_request->checkUser($user_name);
-            } catch (HttpRequestException $exception) {
-                $this->setHttpRequestError($exception->getMessage());
-            }
-            $this->setHttpRequestSuccess("User successfully added.");
-        }
     }
 
     /**

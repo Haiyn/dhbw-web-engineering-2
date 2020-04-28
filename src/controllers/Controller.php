@@ -3,6 +3,8 @@
 namespace controllers;
 
 use components\authorization\AuthorizationService;
+use http\Exception\BadMethodCallException;
+use requests\HttpRequestException;
 use stdClass;
 
 abstract class Controller
@@ -19,8 +21,6 @@ abstract class Controller
     }
 
     abstract public function render($params);
-
-    abstract public function httpRequest();
 
     /*
      * Redirects to the given url. Makes use of the router.
@@ -75,29 +75,5 @@ abstract class Controller
             $redirect = $redirect . "&" . $key . (!empty($value) ? "=" . $value : "");
         }
         $this->redirect($redirect);
-    }
-
-    /**
-     * Successfully finish the http request
-     * @param $successMessage * Success message to be given to the response
-     * @param array $data * Additional data
-     */
-    protected function setHttpRequestSuccess($successMessage, $data = [])
-    {
-        http_response_code(200);
-        header("Content-Type: application/json");
-        echo json_encode(array("message" => $successMessage, "data" => $data));
-    }
-
-    /**
-     * Finish the http request with an error
-     * @param  * Error message to be given to the response
-     * @param array $data * Additional data
-     */
-    protected function setHttpRequestError($errorMessage, $data = [])
-    {
-        http_response_code(500);
-        header("Content-Type: application/json");
-        die(json_encode(array("message" => $errorMessage, "data" => $data)));
     }
 }

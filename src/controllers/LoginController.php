@@ -39,11 +39,6 @@ class LoginController extends Controller
         $this->view->isError = isset($_GET["error"]);
     }
 
-    public function httpRequest()
-    {
-        // TODO: Implement httpRequest() method.
-    }
-
     /**
      * Log the user in, validate the data and set the session
      * @param $user_data * Data of the user

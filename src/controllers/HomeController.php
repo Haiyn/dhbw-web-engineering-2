@@ -18,9 +18,4 @@ class HomeController extends Controller
         $this->view->isSuccess = isset($_GET["success"]);
         $this->view->pageTitle = "Home";
     }
-
-    public function httpRequest()
-    {
-        // TODO: Implement httpRequest() method.
-    }
 }

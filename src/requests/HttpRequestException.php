@@ -6,20 +6,20 @@ use Exception;
 
 class HttpRequestException extends Exception
 {
-    private $params;
+    private $data;
 
-    public function __construct($message, $params = [])
+    public function __construct($message, $data = [])
     {
-        $this->params = $params;
+        $this->data = $data;
         parent::__construct($message);
     }
 
     /**
-     * Return array of params
-     * @return array * Array of params
+     * Return array of data
+     * @return array * Array of data
      */
-    public function getParams()
+    public function getData()
     {
-        return $this->params;
+        return $this->data;
     }
 }

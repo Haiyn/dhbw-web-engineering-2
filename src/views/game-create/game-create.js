@@ -3,6 +3,7 @@ $(document).on("hidden.bs.modal", function () {
 });
 
 let users = [];
+let userIds = [];
 let count = 1;
 
 const deleteCell = '<button type="button" title="Delete" onclick="removeUser(this)" class="btn btn-danger">Delete</button>';
@@ -10,20 +11,18 @@ const deleteCell = '<button type="button" title="Delete" onclick="removeUser(thi
 function addUser()
 {
     const name = document.getElementById("game-create-modal-user").value;
-    $.ajax({
-        url: window.location.origin + "/game-create",
-        accepts: {json: 'application/json'},
-        dataType: 'json',
-        method: 'POST',
-        data: {action: 'http_request', user_name: name},
-        success: (result) => {
+    const request = new HttpRequest(
+        '/game-create',
+        {action: 'http_request', handler: 'user_access', user_name: name, user_ids: userIds}
+    );
+    request.send().then(result => {
             result.message;
+            userIds.push(result.data['user_id']);
             addRow(name);
-        },
-        error: (result) => {
-            result.message;
-        }
-    });
+            showSuccess(result.message)
+        }).catch(result => {
+            showError(result.responseJSON.message);
+        });
 }
 
 function addRow(name)
