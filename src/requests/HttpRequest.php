@@ -7,7 +7,7 @@ use stdClass;
 
 /**
  * Class HttpRequest
- * Handles the http requests
+ * Handles the http requests.
  * @package requests
  */
 class HttpRequest
