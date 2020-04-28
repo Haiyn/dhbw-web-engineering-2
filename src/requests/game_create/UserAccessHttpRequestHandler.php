@@ -11,13 +11,14 @@ class UserAccessHttpRequestHandler implements HttpRequestHandler
     public function handle()
     {
         if (isset($_POST['user_name'])) {
+            $user_name = trim(htmlspecialchars($_POST['user_name']));
             // Check if users exists
             $user = User::getInstance();
-            $found_user = $user->getUserByUsername($_POST['user_name']);
+            $found_user = $user->getUserByUsername($user_name);
             if (empty($found_user)) {
-                $found_user = $user->getUserByEmail($_POST['user_name']);
+                $found_user = $user->getUserByEmail($user_name);
                 if (empty($found_user)) {
-                    throw new HttpRequestException("User with name {$_POST['user_name']} does not exist.");
+                    throw new HttpRequestException("User with name {$user_name} does not exist.");
                 }
             }
             // Check if user to be added is the current user (game creator)
@@ -28,7 +29,7 @@ class UserAccessHttpRequestHandler implements HttpRequestHandler
             if (isset($_POST['user_ids'])) {
                 foreach ($_POST['user_ids'] as $user_id) {
                     if ($user_id == $found_user->user_id) {
-                        throw new HttpRequestException("User with name {$_POST['user_name']} is already added.");
+                        throw new HttpRequestException("User with name {$user_name} is already added.");
                     }
                 }
             }

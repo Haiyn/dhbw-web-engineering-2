@@ -9,7 +9,7 @@ use components\authorization\AuthorizationService;
  * Handles the http requests.
  * @package requests
  */
-class HttpRequest
+class HttpRequestMiddleware
 {
     protected $session;
 
@@ -33,7 +33,7 @@ class HttpRequest
         } catch (HttpRequestException $exception) {
             $this->setHttpRequestError($exception->getMessage(), $exception->getData());
         }
-        if(!empty($result) {
+        if (!empty($result)) {
             $this->setHttpRequestSuccess($result['message'], $result['data']);
         }
     }

@@ -5,9 +5,8 @@
  * @package requests
  */
 class HttpRequest {
-    constructor(url, data)
+    constructor(data)
     {
-        this.url = url;
         this.data = data;
     }
 
@@ -18,7 +17,7 @@ class HttpRequest {
     send()
     {
         return new Promise((resolve, reject) => $.ajax({
-            url: window.location.origin + this.url,
+            url: window.location.origin + window.location.pathname,
             accepts: {json: 'application/json'},
             dataType: 'json',
             method: 'POST',

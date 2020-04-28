@@ -14,15 +14,11 @@ const deleteCell = '<button type="button" title="Delete" onclick="removeUser(thi
 function addUser()
 {
     const name = document.getElementById("game-create-modal-user").value;
-    const request = new HttpRequest(
-        '/game-create',
-        {action: 'http_request', handler: 'user_access', user_name: name, user_ids: userIds}
-    );
+    const request = new HttpRequest({action: 'http_request', handler: 'user_access', user_name: name, user_ids: userIds});
     request.send().then(result => {
-            result.message;
             userIds.push(result.data['user_id']);
             addRow(name);
-            showSuccess(result.message)
+            showSuccess(result.message);
         }).catch(result => {
             showError(result.responseJSON.message);
         });

@@ -4,7 +4,7 @@ namespace components\core;
 
 use components\InternalComponent;
 use controllers\NotFoundController;
-use requests\HttpRequest;
+use requests\HttpRequestMiddleware;
 
 class Router extends InternalComponent
 {
@@ -99,7 +99,7 @@ class Router extends InternalComponent
             // Check if the handler exists
             if (file_exists($handlerPath)) {
                 // Call the http request
-                $httpRequest = new HttpRequest();
+                $httpRequest = new HttpRequestMiddleware();
                 $httpRequest->handleHttpRequest($handlerName);
             }
         } else {
