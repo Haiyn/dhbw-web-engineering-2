@@ -59,8 +59,13 @@ class GameCreateController extends Controller
         if (!$game->addGame($data)) {
             $this->setError("Game could not be created.");
         }
-        // Add the players
+        // Add the creator to the players
         $player = Player::getInstance();
+        $data['user_id'] = $_SESSION['USER_ID'];
+        $data['player_id'] = Utility::generateUUIDv4();
+        $data['estimated_value'] = 0;
+        $player->addPlayer($data);
+        // Add all other players
         foreach ($data['users'] as $u) {
             if (isset($u['name'])) {
                 // Get user by username oder email

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS players (
     player_id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
     game_id VARCHAR(36) NOT NULL REFERENCES games (game_id),
-    estimated_value INTEGER NOT NULL DEFAULT 0
+    estimated_value FLOAT NOT NULL DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS sessions (
     session_id VARCHAR(36) PRIMARY KEY,

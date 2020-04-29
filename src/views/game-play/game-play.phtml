@@ -4,11 +4,72 @@
     <script type="text/javascript" src="/resources/assets/jquery/jquery.min.js"></script>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
     <script type="text/javascript" src="/views/game-play/game-play.js"></script>
+    <link href="/views/game-play/game-play.css" rel="stylesheet">
 </head>
 <body>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
     <div class="container min-vh-80">
+        <h1>Current task: <?=isset($currentTask) ? $currentTask : ""?></h1>
 
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/alert/alert.html" ?>
+
+        <form method="post">
+            <div class="form-group mt-3">
+                <h5>Your estimation:</h5><br/>
+                <div id="game-play-cards" class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="0" autocomplete="off" value="0" checked>0
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="1" autocomplete="off" value="1">1
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="1/2" autocomplete="off" value="1.5">1/2
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="2" autocomplete="off" value="2">2
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="3" autocomplete="off" value="3">3
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="5" autocomplete="off" value="5">5
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="8" autocomplete="off" value="8">8
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="13" autocomplete="off" value="13">13
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="20" autocomplete="off" value="20">20
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="40" autocomplete="off" value="40">40
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="100" autocomplete="off" value="100">100
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="?" autocomplete="off" value="-1">?
+                    </label>
+                </div>
+            </div>
+            <div class="form-group mt-5">
+                <h5>All players:</h5><br/>
+                <table id="game-play-players-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </form>
     </div>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
 </body>
