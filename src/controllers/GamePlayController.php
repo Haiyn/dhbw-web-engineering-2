@@ -20,6 +20,8 @@ class GamePlayController extends Controller
             }
             if ($this->checkIfUserHasAccess($gameById)) {
                 // At this point the user is either invited or the creator of the game
+                $this->view->title = $gameById->title;
+                $this->view->description = $gameById->description;
                 $player = Player::getInstance();
                 $players = $player->getPlayersByGameId($_GET['game_id']);
                 // Get the current estimated value of the player

@@ -9,7 +9,8 @@
 <body>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
     <div class="container min-vh-80">
-        <h1>Current task: <?=isset($currentTask) ? $currentTask : ""?></h1>
+        <h1>Task: <?=isset($title) ? $title : ""?></h1><br/>
+        <h4>Description: <?=isset($title) ? $title : ""?></h4><br/>
 
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/alert/alert.html" ?>
 

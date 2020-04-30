@@ -30,11 +30,13 @@ class UpdateEstimatedValueHttpRequestHandler implements HttpRequestHandler
             if (!$valid) {
                 throw new HttpRequestException("The estimated value '{$estimated_value}' is not valid.");
             }
+            // Check if game is running
             $game = Game::getInstance();
             $found_game = $game->getGameById($game_id);
             if ($found_game->status != 'running') {
                 throw new HttpRequestException("You cannot estimate this task, because it has already been estimated.");
             }
+            // Update the estimated value
             $player = Player::getInstance();
             $player_data = [
                 "game_id" => $game_id,
