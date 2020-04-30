@@ -2,6 +2,7 @@
 
 namespace requests\game_play;
 
+use models\Game;
 use models\Player;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
@@ -17,6 +18,23 @@ class UpdateEstimatedValueHttpRequestHandler implements HttpRequestHandler
                 FILTER_SANITIZE_NUMBER_FLOAT,
                 FILTER_FLAG_ALLOW_FRACTION
             );
+            // Check if estimated value is valid
+            $values = [0, 1, 1.5, 2, 3, 5, 8, 13, 20, 40, 100, -1];
+            $valid = false;
+            foreach ($values as $value) {
+                if ($value == $estimated_value) {
+                    $valid = true;
+                    break;
+                }
+            }
+            if (!$valid) {
+                throw new HttpRequestException("The estimated value '{$estimated_value}' is not valid.");
+            }
+            $game = Game::getInstance();
+            $found_game = $game->getGameById($game_id);
+            if ($found_game->status != 'running') {
+                throw new HttpRequestException("You cannot estimate this task, because it has already been estimated.");
+            }
             $player = Player::getInstance();
             $player_data = [
                 "game_id" => $game_id,
