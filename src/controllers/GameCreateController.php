@@ -65,6 +65,9 @@ class GameCreateController extends Controller
         $data['player_id'] = Utility::generateUUIDv4();
         $data['estimated_value'] = 0;
         $player->addPlayer($data);
+        if (empty($data['users'])) {
+            $data['users'] = [];
+        }
         // Add all other players
         foreach ($data['users'] as $u) {
             if (isset($u['name'])) {

@@ -3,19 +3,18 @@
 namespace requests\game_play;
 
 use models\Game;
-use models\Player;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
-class GetPlayersHttpRequestHandler implements HttpRequestHandler
+class GetStatusHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()
     {
         if (isset($_POST['game_id'])) {
             $game_id = filter_var(htmlspecialchars($_POST['game_id']), FILTER_SANITIZE_ENCODED);
-            $player = Player::getInstance();
-            $players = $player->getPlayersByGameId($game_id);
-            return ["message" => "", "data" => ["players" => $players]];
+            $game = Game::getInstance();
+            $found_game = $game->getGameById($game_id);
+            return ["message" => "", "data" => ["status" => $found_game->status]];
         }
         throw new HttpRequestException("No game id given.");
     }

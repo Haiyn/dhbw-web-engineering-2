@@ -20,6 +20,15 @@ class GamePlayController extends Controller
             }
             if ($this->checkIfUserHasAccess($gameById)) {
                 // At this point the user is either invited or the creator of the game
+                $player = Player::getInstance();
+                $players = $player->getPlayersByGameId($_GET['game_id']);
+                // Get the current estimated value of the player
+                foreach ($players as $p) {
+                    if ($p->user_id == $_SESSION['USER_ID']) {
+                        $this->view->estimatedValue = $p->estimated_value;
+                        break;
+                    }
+                }
             } else {
                 // The user is not invited or the creator of the game, so he gets redirected to game overview page
                 $this->redirect("game-overview");
@@ -37,6 +46,7 @@ class GamePlayController extends Controller
         $player = Player::getInstance();
         // Check if current user is game creator
         if ($game->creator_id == $_SESSION['USER_ID']) {
+            $this->view->isCreator = true;
             return true;
         }
         // Check if user is invited to an game

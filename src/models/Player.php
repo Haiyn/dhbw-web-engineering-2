@@ -56,6 +56,11 @@ class Player
         );
     }
 
+    /**
+     * Update the player of a game
+     * @param $new_player_data * New data of the player
+     * @return bool * Successful/ not successful
+     */
     public function updatePlayer($new_player_data)
     {
         $data = $this->mapPlayerDataToPlayerTableData($new_player_data);

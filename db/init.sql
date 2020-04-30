@@ -15,7 +15,12 @@ CREATE TABLE IF NOT EXISTS games (
     creator_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
     creation_date TIMESTAMP DEFAULT NOW(),
     title VARCHAR(32) NOT NULL,
-    description VARCHAR(256) NOT NULL
+    description VARCHAR(256) NOT NULL,
+    status ENUM('running', 'finished') DEFAULT 'running',
+    minimum FLOAT NOT NULL DEFAULT 0,
+    maximum FLOAT NOT NULL DEFAULT 0,
+    average FLOAT NOT NULL DEFAULT 0,
+    most_picker FLOAT NOT NULL DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS players (
     player_id VARCHAR(36) PRIMARY KEY,

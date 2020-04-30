@@ -6,7 +6,7 @@ use models\Player;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
-class UpdatePlayerHttpRequestHandler implements HttpRequestHandler
+class UpdateEstimatedValueHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()
     {
@@ -28,6 +28,6 @@ class UpdatePlayerHttpRequestHandler implements HttpRequestHandler
             $estimated_value = $estimated_value == -1 ? "?" : $estimated_value;
             return ["message" => "You have successfully estimated the number '{$estimated_value}'.", "data" => []];
         }
-        return ["message" => "An error occurred while voting.", "data" => []];
+        throw new HttpRequestException("No game id or estimated value given.");
     }
 }
