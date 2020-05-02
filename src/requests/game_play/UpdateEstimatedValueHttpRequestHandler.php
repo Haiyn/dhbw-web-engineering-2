@@ -20,14 +20,7 @@ class UpdateEstimatedValueHttpRequestHandler implements HttpRequestHandler
             );
             // Check if estimated value is valid
             $values = [0, 1, 1.5, 2, 3, 5, 8, 13, 20, 40, 100, -1];
-            $valid = false;
-            foreach ($values as $value) {
-                if ($value == $estimated_value) {
-                    $valid = true;
-                    break;
-                }
-            }
-            if (!$valid) {
+            if (!in_array($estimated_value, $values, false)) {
                 throw new HttpRequestException("The estimated value '{$estimated_value}' is not valid.");
             }
             // Check if game is running
