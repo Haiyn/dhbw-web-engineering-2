@@ -36,7 +36,9 @@ class Player
     public function getPlayersByGameId($game_id)
     {
         return self::$database->fetch(
-            "SELECT * FROM players WHERE game_id = :game_id",
+            "SELECT players.user_id, players.estimated_value, users.username FROM players
+            INNER JOIN users ON players.user_id = users.user_id
+            WHERE players.game_id = :game_id",
             [":game_id" => $game_id]
         );
     }
@@ -51,6 +53,23 @@ class Player
         return self::$database->execute(
             "INSERT INTO players VALUES (:player_id, :user_id, :game_id, :estimated_value)",
             $this->mapPlayerDataToPlayerTableData($player_data)
+        );
+    }
+
+    /**
+     * Update the player of a game
+     * @param $new_player_data * New data of the player
+     * @return bool * Successful/ not successful
+     */
+    public function updatePlayer($new_player_data)
+    {
+        $data = $this->mapPlayerDataToPlayerTableData($new_player_data);
+        unset($data[':player_id']);
+        return self::$database->execute(
+            "UPDATE players
+            SET estimated_value = :estimated_value
+            WHERE game_id = :game_id AND user_id = :user_id",
+            $data
         );
     }
 

@@ -35,6 +35,6 @@ class UserAccessHttpRequestHandler implements HttpRequestHandler
             }
             return ["message" => "User successfully added.", "data" => ["user_id" => $found_user->user_id]];
         }
-        return ["message" => "No username given.", "data" => []];
+        throw new HttpRequestException("No username given.");
     }
 }

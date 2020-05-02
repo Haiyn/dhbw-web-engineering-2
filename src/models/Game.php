@@ -36,7 +36,8 @@ class Game
     public function addGame($data)
     {
         return self::$database->execute(
-            "INSERT INTO games VALUES (:game_id, :creator_id, DEFAULT, :title, :description);",
+            "INSERT INTO games VALUES (:game_id, :creator_id, DEFAULT, :title, :description, DEFAULT, DEFAULT,
+                  DEFAULT, DEFAULT, DEFAULT);",
             $this->mapGameDataToGameTableData($data)
         );
     }
@@ -72,6 +73,22 @@ class Game
             return [];
         }
         return $games;
+    }
+
+    /**
+     * Update the status of the game to running/finished
+     * @param $game_id * Id of the game to be updated
+     * @param $new_status * The new status
+     * @return bool * Successful/ not successful
+     */
+    public function updateGameStatus($game_id, $new_status)
+    {
+        return self::$database->execute(
+            "UPDATE games
+            SET status = :status
+            WHERE game_id = :game_id",
+            [":game_id" => $game_id, ":status" => $new_status]
+        );
     }
 
     /**
