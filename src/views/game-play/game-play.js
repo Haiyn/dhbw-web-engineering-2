@@ -7,7 +7,7 @@ $(document).ready(function () {
     getStatus().then(() => {
         showResult();
     }).catch(() => {
-        showResult('An error occurred, result could not be shown.')
+        showError('An error occurred, result could not be shown.')
     });
 });
 
@@ -118,9 +118,31 @@ function updateEstimatedValue(value)
  */
 function finishEstimation()
 {
+    // Finish the estimation
+    let estimationResult;
     const request = new HttpRequest({action: 'http_request', handler: 'finish_estimation', game_id: getQueryParam("game_id")});
-    request.send().then(result => {
-        showSuccess(result.message);
+    request.send().then(result =>  {
+
+        // Get all estimations from the database
+        const request = new HttpRequest({action: 'http_request', handler: 'get_players', game_id: getQueryParam("game_id")});
+        request.send().then(result => {
+            // put the estimations into an array
+            let estimates = [];
+            result.data['players'].forEach(player => {
+                estimates.push(parseInt(player.estimated_value));
+            });
+
+            // Calculate the result values
+            estimationResult = calculateResult(estimates);
+
+            // Save and show the result values
+            saveResult(estimationResult);
+            showResult();
+
+            showSuccess(result.message);
+        }).catch(result => {
+            showError(result.responseJSON.message);
+        });
     }).catch(result => {
         showError(result.responseJSON.message);
     });
@@ -131,10 +153,81 @@ function finishEstimation()
  */
 function showResult()
 {
-    $('#game-play-result').show();
+    // Hide the inputs that dont do anything anymore
+    $('#game-play-estimation').hide();
+    $('#game-play-estimation-finish').hide();
+
+    // Get the game result from the database
+    const request = new HttpRequest({action: 'http_request', handler: 'get_game_result', game_id: getQueryParam("game_id")});
+    request.send().then(result => {
+        $('#game-play-result-minimum').append(result.data['minimum'].toString());
+        $('#game-play-result-maximum').append(result.data['maximum'].toString());
+        $('#game-play-result-average').append(result.data['average'].toString());
+        $('#game-play-result-most-picked').append(result.data['most'].toString());
+
+        $('#game-play-result').show();
+    }).catch(result => {
+        showError(result.responseJSON.message);
+    });
 }
 
+/**
+ * Calculates the result values (min, max, avg, most picked) when given an array of numbers
+ * @param estimates * number array
+ * @returns {{most: string, average: number, maximum: number, minimum: number}} * object
+ */
+function calculateResult(estimates) {
+    let minimum = 0, maximum = 0, average = 0, most = 0, mostCount = 0, count = {};
+
+    // Calculate the min and max values
+    minimum = Math.min(...estimates);
+    maximum = Math.max(...estimates);
+
+    // Calculate the average value
+    for(let i = 0; i < estimates.length; i++) {
+        average += estimates[i];
+    }
+    average = Math.round(average / estimates.length);
+
+    // count the occurrences of each estimation value and find the most picked card
+    estimates.forEach(function(i) { count[i] = (count[i] || 0) + 1;});
+    mostCount = Math.max(...Object.values(count));
+    most = Object.keys(count).find(key => count[key] === mostCount);
+
+    return { "minimum": minimum, "maximum": maximum, "average": average, "most": most };
+
+}
+
+/**
+ * Saves a result object to the database
+ * @param result * object with all results
+ */
+function saveResult(result) {
+    const request = new HttpRequest({
+        action: 'http_request',
+        handler: 'save_game_result',
+        game_id: getQueryParam("game_id"),
+        minimum: result.minimum,
+        maximum: result.maximum,
+        average: result.average,
+        most: result.most});
+    request.send().then(result => {
+        showSuccess(result.message);
+    }).catch(result => {
+        console.log(result);
+        showError(result.responseJSON.message);
+    });
+}
+
+/**
+ * Closes (deletes) the game and redirects the user
+ */
 function closeGame()
 {
-
+    const request = new HttpRequest({action: 'http_request', handler: 'close_game', game_id: getQueryParam("game_id")});
+    request.send().then(result => {
+        window.location.href = "/game-overview";
+    }).catch(result => {
+        showError(result.responseJSON.message);
+    });
 }
