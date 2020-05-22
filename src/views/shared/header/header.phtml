@@ -5,6 +5,7 @@ mo    <nav class="navbar navbar-expand-sm navbar-light bg-light">
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+                <a class="navbar-brand" href="/home"><img alt="Logo" src="/resources/images/cards-1-512.png" height="32px"></a>
                 <a class="nav-item nav-link
                    <?= strpos($_SERVER['REQUEST_URI'], "home") ? "active" : "" ?>"
                    href="/home">Home</a>
@@ -15,7 +16,7 @@ mo    <nav class="navbar navbar-expand-sm navbar-light bg-light">
                        href="/game-overview">Games</a>
                     <a class="nav-item nav-link
                         <?= strpos($_SERVER['REQUEST_URI'], "profile") ? "active" : "" ?>"
-                       href="/profile>">My Profile</a>
+                       href="/profile">My Profile</a>
                     <a class="nav-item nav-link" href="/logout">Logout</a>
                 <?php else: ?>
                     <!-- Not logged in -->
