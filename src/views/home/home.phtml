@@ -1,13 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<head>
-    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
-</head>
-<body>
-    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
-    <div class="container min-vh-80">
-    </div>
-    <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
-</body>
+    <head>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/shared.phtml" ?>
+        <link href="/views/home/home.css" rel="stylesheet">
+    <body>
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/header/header.phtml" ?>
+
+        <div class="jumbotron jumbotron-top text-center">
+            <div class="container-fluid">
+                <h1 class="jumbotron-top-heading">Planning Poker</h1>
+                <p class="jumbotron-top-paragraph">Estimate your tasks as a team with the help of planning poker!</p>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="card-deck">
+                <div class="col-4">
+                    <a href="/game-create">
+                        <div class="card">
+                            <img class="card-img-top" src="../resources/images/signpost-2-512.png" alt="Card image cap">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Create Games</h5>
+                                <p class="card-text">Create your own planning poker games and decide who joins in to estimate.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="/game-overview">
+                        <div class="card">
+                            <img class="card-img-top" src="../resources/images/cards-1-512.png" alt="Card image cap">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Play Games</h5>
+                                <p class="card-text">See an overview of all games you can participate in and start estimating!</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="/profile">
+                        <div class="card">
+                            <img class="card-img-top" src="../resources/images/gear-2-512.png" alt="Card image cap">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Manage your Profile</h5>
+                                <p class="card-text">Look at your own profile and change things around.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron jumbotron-bottom text-center">
+            <div class="container">
+                <h1>How it works</h1>
+                <p>Simply log into your account and create a game with title and description. Maintain control of
+                    who can joni the game by inviting other users. If you are invited, you can easily join a game via
+                    the game overview page. As a creator, you can decide when to finish an estimation.</p><br>
+                <p>Not a member yet?<br>
+                    Register <a href="/register">here</a> for free!</p>
+            </div>
+        </div>
+
+        </div>
+        </div>
+
+
+        <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
+    </body>
 </html>
