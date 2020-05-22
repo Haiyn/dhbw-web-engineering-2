@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS players (
 CREATE TABLE IF NOT EXISTS sessions (
     session_id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL REFERENCES users (user_id),
-    login_time INTEGER  NOT NULL,
     ip_address VARCHAR(16) NOT NULL,
     user_agent TEXT NOT NULL
 );

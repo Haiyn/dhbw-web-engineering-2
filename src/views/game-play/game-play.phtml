@@ -15,7 +15,7 @@
         <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/alert/alert.html" ?>
 
         <form method="post">
-            <div class="form-group mt-3">
+            <div id="game-play-estimation" class="form-group mt-3">
                 <h5>Your estimation:</h5><br/>
                 <div id="game-play-cards" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary <?=isset($estimatedValue) && $estimatedValue == 0 ? 'active' : ''?>">
@@ -89,10 +89,30 @@
             </div>
         </form>
 
+
         <?php if (isset($isCreator) && $isCreator): ?>
-            <button type="button" class="btn btn-primary" onclick="finishEstimation()">Finish estimation</button>
-            <button type="button" class="btn btn-primary" onclick="closeGame()">Close game</button>
+            <button id="game-play-estimation-finish" type="button" class="btn btn-primary" onclick="finishEstimation()">Finish estimation</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#game-play-close-modal">Close game</button>
         <?php endif; ?>
+    </div>
+
+    <!-- Game Close Modal -->
+    <div id="game-play-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to close this game?</h5><br>
+                </div>
+                <div class="modal-body">
+                    <p>Closing the game means it will be deleted permanently. You won't be able to access it again after confirming.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="closeGame()" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
     <?php include "{$_SERVER['DOCUMENT_ROOT']}/views/shared/footer/footer.phtml" ?>
 </body>

@@ -92,6 +92,36 @@ class Game
     }
 
     /**
+     * Saves estimation results to a game entry
+     * @param $game_id * the game to be updated
+     * @param $result * the estimation result values as array
+     * @return bool * successful/not successful
+     */
+    public function saveEstimationResult($game_id, $result) {
+        $data = ["game_id" => $game_id];
+        $data += $this->mapGameResultToGameTableData($result);
+        return self::$database->execute(
+            "UPDATE games
+            SET minimum = :minimum, maximum = :maximum, average = :average, most_picker = :most
+            WHERE game_id = :game_id",
+            $data
+        );
+    }
+
+    /**
+     * Deletes a game
+     * @param $game_id * game id to delete
+     * @return bool * successful/not successful
+     */
+    public function deleteGameById($game_id) {
+        return self::$database->execute(
+            "DELETE FROM games
+            WHERE game_id = :game_id",
+            [":game_id" => $game_id]
+        );
+    }
+
+    /**
      * Maps the data to the database
      * @param $data * Data of the game
      * @return array * Modified data
@@ -103,6 +133,20 @@ class Game
             ":creator_id" => $data['creator_id'],
             ":title" => $data['title'],
             ":description" => $data['description']
+        ];
+    }
+
+    /**
+     * Maps estimation result data to the database format
+     * @param $data * estimation result data
+     * @return array * mapped data
+     */
+    private function mapGameResultToGameTableData($data) {
+        return $data = [
+            ":minimum" => $data['minimum'],
+            ":maximum" => $data['maximum'],
+            ":average" => $data['average'],
+            ":most" => $data['most']
         ];
     }
 }
