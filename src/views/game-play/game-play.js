@@ -137,7 +137,6 @@ function finishEstimation()
 
             // Save and show the result values
             saveResult(estimationResult);
-            showResult();
 
             showSuccess(result.message);
         }).catch(result => {
@@ -214,7 +213,6 @@ function saveResult(result) {
     request.send().then(result => {
         showSuccess(result.message);
     }).catch(result => {
-        console.log(result);
         showError(result.responseJSON.message);
     });
 }
