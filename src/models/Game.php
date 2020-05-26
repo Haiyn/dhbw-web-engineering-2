@@ -97,7 +97,8 @@ class Game
      * @param $result * the estimation result values as array
      * @return bool * successful/not successful
      */
-    public function saveEstimationResult($game_id, $result) {
+    public function saveEstimationResult($game_id, $result)
+    {
         $data = ["game_id" => $game_id];
         $data += $this->mapGameResultToGameTableData($result);
         return self::$database->execute(
@@ -113,7 +114,8 @@ class Game
      * @param $game_id * game id to delete
      * @return bool * successful/not successful
      */
-    public function deleteGameById($game_id) {
+    public function deleteGameById($game_id)
+    {
         return self::$database->execute(
             "DELETE FROM games
             WHERE game_id = :game_id",
@@ -141,7 +143,8 @@ class Game
      * @param $data * estimation result data
      * @return array * mapped data
      */
-    private function mapGameResultToGameTableData($data) {
+    private function mapGameResultToGameTableData($data)
+    {
         return $data = [
             ":minimum" => $data['minimum'],
             ":maximum" => $data['maximum'],

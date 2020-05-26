@@ -13,7 +13,7 @@ class LogoutController extends Controller
 {
     public function render($parameters)
     {
-        if(isset($_SESSION['USER_ID'])) {
+        if (isset($_SESSION['USER_ID'])) {
             $authorizationService = AuthorizationService::getInstance();
             $authorizationService->unsetSession();
         } else {

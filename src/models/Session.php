@@ -6,7 +6,6 @@ use components\database\DatabaseService;
 
 class Session
 {
-
     private static $instance;
     private static $database;
 
@@ -35,7 +34,9 @@ class Session
             "SELECT * from sessions WHERE session_id = :session_id",
             [":session_id" => $session_id]
         );
-        if (empty($session)) return [];
+        if (empty($session)) {
+            return [];
+        }
         return $session[0];
     }
 
@@ -50,7 +51,9 @@ class Session
             "SELECT * from sessions WHERE user_id = :user_id",
             [":user_id" => $user_id]
         );
-        if (empty($session)) return [];
+        if (empty($session)) {
+            return [];
+        }
         return $session[0];
     }
 
@@ -66,9 +69,7 @@ class Session
         if (empty($this->getSessionBySessionId($session_data['session_id']))) {
             // No session with this ID exists yet, insert it
             $query = "INSERT INTO sessions VALUES (:session_id, :user_id, :ip_address, :user_agent)";
-        }
-        else
-        {
+        } else {
             // Session ID already exists in database, update the existing entry
             $query = "UPDATE sessions
                 SET user_id = :user_id, ip_address = :ip_address, user_agent = :user_agent

@@ -2,8 +2,8 @@
 
 namespace models;
 
-use components\database\DatabaseService;
 use components\core\Utility;
+use components\database\DatabaseService;
 
 class User
 {
@@ -94,7 +94,8 @@ class User
      * @param $password * the new clear text password
      * @return bool * successful/not successful
      */
-    public function updatePassword($user_id, $password) {
+    public function updatePassword($user_id, $password)
+    {
         return self::$database->execute(
             "UPDATE users SET password = :password WHERE user_id = :user_id",
             [
@@ -110,7 +111,8 @@ class User
      * @param $new * New data array
      * @return bool * successful/not successful
      */
-    public function updatePersonalInformation($old, $new) {
+    public function updatePersonalInformation($old, $new)
+    {
         // Map the data to query format
         $new += ["user_id" => $old['user_id']];
         $data = $this->mapRegisterDataToUserTableData($new);

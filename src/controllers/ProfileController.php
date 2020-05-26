@@ -33,9 +33,10 @@ class ProfileController extends Controller
      * @return mixed|string|null * returns user id (string) if a valid UUIDv4 is set in the URL or if no uuid was given
      * returns null if an invalid user id was given
      */
-    private function getUserID() {
+    private function getUserID()
+    {
         // If a GET parameter is set, validate it
-        if(isset($_GET['user_id'])) {
+        if (isset($_GET['user_id'])) {
             if (Utility::isValidUUIDv4($_GET['user_id'])) {
                 $this->view->isLoggedInUser = false;
                 return htmlspecialchars($_GET['user_id']);
@@ -53,10 +54,11 @@ class ProfileController extends Controller
      * Sends the user information to the view for displaying
      * @param $user * user object that contains the information to display
      */
-    private function initializeViewData($user) {
+    private function initializeViewData($user)
+    {
         // Only send the public information to the view
         $this->view->username = $user->username;
-        if($this->view->isLoggedInUser) {
+        if ($this->view->isLoggedInUser) {
             $this->view->email = $user->email;
         }
         $this->view->firstName = $user->first_name;

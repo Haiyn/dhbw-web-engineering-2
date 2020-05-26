@@ -68,12 +68,13 @@ class UserValidator
      * @param $user_data * data array to validate
      * @throws ValidatorException * if data invalid
      */
-    public function validateLoginData($user_data) {
+    public function validateLoginData($user_data)
+    {
         if (empty($user_data['foundUser'])) {
             throw new ValidatorException("Invalid Username or Email!");
         }
 
-        if($user_data['passwordHash'] != $user_data['foundUser']->password) {
+        if ($user_data['passwordHash'] != $user_data['foundUser']->password) {
             throw new ValidatorException("Invalid password!");
         }
     }

@@ -2,8 +2,6 @@
 
 namespace components;
 
-use stdClass;
-
 abstract class InternalComponent
 {
     /*

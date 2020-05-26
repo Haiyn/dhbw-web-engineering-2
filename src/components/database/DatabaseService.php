@@ -9,7 +9,6 @@ use PDOException;
 
 class DatabaseService extends InternalComponent
 {
-
     private static $instance;
     private static $connection;
 

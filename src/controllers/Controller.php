@@ -55,16 +55,6 @@ abstract class Controller
         $this->redirect($redirect);
     }
 
-    protected function setWarning($warningMessage, $params = [])
-    {
-        $_SESSION[str_replace("-", "_", strtoupper($this->viewName)) . "_WARNING"] = $warningMessage;
-        $redirect = "/{$this->viewName}?warning";
-        foreach ($params as $key => $value) {
-            $redirect = $redirect . "&" . $key . (!empty($value) ? "=" . $value : "");
-        }
-        $this->redirect($redirect);
-    }
-
     protected function setSuccess($successMessage, $params = [])
     {
         $_SESSION[str_replace("-", "_", strtoupper($this->viewName)) . "_SUCCESS"] = $successMessage;
