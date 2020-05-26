@@ -3,7 +3,6 @@
 namespace requests\game_play;
 
 use models\Game;
-use models\Player;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 

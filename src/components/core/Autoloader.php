@@ -3,11 +3,11 @@
 namespace components\core;
 
 use components\InternalComponent;
+
 require_once 'components/InternalComponent.php';
 
 class Autoloader extends InternalComponent
 {
-
     /**
      * Registers all active autoloaders
      */
@@ -29,4 +29,3 @@ class Autoloader extends InternalComponent
         }
     }
 }
-

@@ -57,21 +57,6 @@ class Utility extends InternalComponent
     }
 
     /**
-     * Gets the application URL (default: http://localhost:8081)
-     * @return string * URL
-     */
-    public static function getApplicationURL()
-    {
-        // Set http or https
-        $url = isset($_SERVER['HTTPS']) && !filter_var($_SERVER['HTTPS'], FILTER_VALIDATE_BOOLEAN)
-            ? 'https'
-            : 'http';
-        // Add the host and port to the protocol
-        $url .= '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
-        return $url;
-    }
-
-    /**
      * Checks if a given string is a valid UUIDv4
      * @param string $str * string to check
      * @return boolean * true if valid, false if invalid

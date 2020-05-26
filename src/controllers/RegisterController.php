@@ -3,8 +3,8 @@
 namespace controllers;
 
 use components\core\Utility;
-use components\validators\ValidatorException;
 use components\validators\UserValidator;
+use components\validators\ValidatorException;
 use models\User;
 
 class RegisterController extends Controller

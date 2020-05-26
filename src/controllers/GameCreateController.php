@@ -3,8 +3,8 @@
 namespace controllers;
 
 use components\core\Utility;
-use components\validators\ValidatorException;
 use components\validators\GameValidator;
+use components\validators\ValidatorException;
 use models\Game;
 use models\Player;
 use models\User;
