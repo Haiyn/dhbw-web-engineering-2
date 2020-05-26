@@ -5,6 +5,11 @@ namespace controllers;
 use models\Game;
 use models\Player;
 
+/**
+ * Class GamePlayController
+ * Controls the game process (estimation and result).
+ * @package controllers
+ */
 class GamePlayController extends Controller
 {
     public function render($params)

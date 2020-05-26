@@ -4,6 +4,11 @@ namespace requests;
 
 use Exception;
 
+/**
+ * Class HttpRequestException
+ * Thrown by httpRequestHandlers. Contains all information for the response.
+ * @package requests
+ */
 class HttpRequestException extends Exception
 {
     private $data;

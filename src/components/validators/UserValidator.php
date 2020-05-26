@@ -2,6 +2,11 @@
 
 namespace components\validators;
 
+/**
+ * Class UserValidator
+ * Validates all user input for user functions. Throws ValidatorError if validation fails.
+ * @package components\validators
+ */
 class UserValidator
 {
     private static $instance;

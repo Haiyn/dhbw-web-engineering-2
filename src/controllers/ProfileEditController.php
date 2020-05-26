@@ -6,6 +6,11 @@ use components\validators\UserValidator;
 use components\validators\ValidatorException;
 use models\User;
 
+/**
+ * Class ProfileEditController
+ * Controls the editing of the own profile.
+ * @package controllers
+ */
 class ProfileEditController extends Controller
 {
     public function render($parameters)

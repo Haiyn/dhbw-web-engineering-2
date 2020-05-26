@@ -6,6 +6,11 @@ use models\User;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class UserAccessHttpRequestHandler
+ * Manages the request to check wether the user can be added to the game.
+ * @package requests\game_create
+ */
 class UserAccessHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

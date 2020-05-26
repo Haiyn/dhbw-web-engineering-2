@@ -6,6 +6,11 @@ use models\Game;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class GetStatusHttpRequestHandler
+ * Manages the request to get the status of the game.
+ * @package requests\game_play
+ */
 class GetStatusHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

@@ -5,6 +5,11 @@ namespace controllers;
 use components\core\Utility;
 use models\User;
 
+/**
+ * Class ProfileController
+ * Displays the users profile.
+ * @package controllers
+ */
 class ProfileController extends Controller
 {
     public function render($parameters)

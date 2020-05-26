@@ -7,6 +7,11 @@ use models\Player;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class UpdateEstimatedValueHttpRequestHandler
+ * Manages the request to update the estimated value of a player of the game.
+ * @package requests\game_play
+ */
 class UpdateEstimatedValueHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

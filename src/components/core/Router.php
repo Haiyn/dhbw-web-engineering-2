@@ -6,6 +6,12 @@ use components\InternalComponent;
 use controllers\NotFoundController;
 use requests\HttpRequestMiddleware;
 
+/**
+ * Class Router
+ * Routes every request to the base URL to the corresponding controller.
+ * Sets all needed information in the controller and calls its render function.
+ * @package components\core
+ */
 class Router extends InternalComponent
 {
     /**

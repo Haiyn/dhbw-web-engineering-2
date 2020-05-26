@@ -7,6 +7,11 @@ use components\validators\UserValidator;
 use components\validators\ValidatorException;
 use models\User;
 
+/**
+ * Class RegisterController
+ * Controls registering of users with email verification.
+ * @package controllers
+ */
 class RegisterController extends Controller
 {
     public function render($parameters)
