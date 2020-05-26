@@ -8,6 +8,16 @@ Services:
 ![Docker Version][docker-image]
 ![Composer Version][composer-image]
 
+## Abgabeinformationen
+
+In der Github Repo sind alle **Quellcode-Dateien** enthalten. 
+
+Die benötigten **Dependencies** sind bereits in `src/resources/assets` vorhanden. 
+
+Der **Datenbank-Dump** ist in `db` vorhanden.
+
+Die ZIP-Version dieser Abgabe enthält die **Projekt-Dokumentation**.
+
 ## Development Setup
 
 Bitte folgen Sie diesen einzelnen Punkten in der angegeben Reihenfolge um das Projekt zu starten:
