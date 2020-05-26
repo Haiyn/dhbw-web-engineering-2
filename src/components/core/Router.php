@@ -76,7 +76,8 @@ class Router extends InternalComponent
 
         // This sets which Controller will be called if no path is given
         if (empty($controllerName)) {
-            $controllerName = "HomeController";
+            $controllerName = "Home";
+            $viewName = "home";
         }
 
         $controllerClassName = $controllerName . "Controller";
