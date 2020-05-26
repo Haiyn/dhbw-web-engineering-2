@@ -6,6 +6,11 @@ use models\Game;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class FinishEstimationHttpRequestHandler
+ * Manages the request to finish the estimation of the game.
+ * @package requests\game_play
+ */
 class FinishEstimationHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

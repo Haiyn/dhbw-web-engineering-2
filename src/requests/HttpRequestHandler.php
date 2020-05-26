@@ -2,6 +2,11 @@
 
 namespace requests;
 
+/**
+ * Interface HttpRequestHandler
+ * Interface for all httpRequestHandlers.
+ * @package requests
+ */
 interface HttpRequestHandler
 {
     /**

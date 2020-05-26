@@ -175,7 +175,8 @@ function showResult()
  * @param estimates * number array
  * @returns {{most: string, average: number, maximum: number, minimum: number}} * object
  */
-function calculateResult(estimates) {
+function calculateResult(estimates)
+{
     let minimum = 0, maximum = 0, average = 0, most = 0, mostCount = 0, count = {};
 
     // Calculate the min and max values
@@ -183,13 +184,14 @@ function calculateResult(estimates) {
     maximum = Math.max(...estimates);
 
     // Calculate the average value
-    for(let i = 0; i < estimates.length; i++) {
+    for (let i = 0; i < estimates.length; i++) {
         average += estimates[i];
     }
     average = Math.round(average / estimates.length);
 
     // count the occurrences of each estimation value and find the most picked card
-    estimates.forEach(function(i) { count[i] = (count[i] || 0) + 1;});
+    estimates.forEach(function (i) {
+        count[i] = (count[i] || 0) + 1;});
     mostCount = Math.max(...Object.values(count));
     most = Object.keys(count).find(key => count[key] === mostCount);
 
@@ -201,7 +203,8 @@ function calculateResult(estimates) {
  * Saves a result object to the database
  * @param result * object with all results
  */
-function saveResult(result) {
+function saveResult(result)
+{
     const request = new HttpRequest({
         action: 'http_request',
         handler: 'save_game_result',

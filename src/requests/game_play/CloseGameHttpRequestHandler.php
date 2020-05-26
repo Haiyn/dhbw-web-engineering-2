@@ -6,6 +6,11 @@ use models\Game;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class CloseGameHttpRequestHandler
+ * Manages the request to close the game.
+ * @package requests\game_play
+ */
 class CloseGameHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

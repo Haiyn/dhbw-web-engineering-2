@@ -6,6 +6,11 @@ use models\Game;
 use requests\HttpRequestException;
 use requests\HttpRequestHandler;
 
+/**
+ * Class SaveGameResultHttpRequestHandler
+ * Manages the request to save the result of the game.
+ * @package requests\game_play
+ */
 class SaveGameResultHttpRequestHandler implements HttpRequestHandler
 {
     public function handle()

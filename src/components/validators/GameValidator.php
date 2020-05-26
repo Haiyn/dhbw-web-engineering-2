@@ -4,7 +4,7 @@ namespace components\validators;
 
 /**
  * Class GameValidator
- * Validates all user input for game functions. Throws ValidatorError if validation fails
+ * Validates all user input for game functions. Throws ValidatorError if validation fails.
  * @package components\validators
  */
 class GameValidator
